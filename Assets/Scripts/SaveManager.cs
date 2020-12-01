@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.JSONSerializeModule;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
@@ -65,7 +64,18 @@ public class SaveManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 // Do something with snapshot...
                 Debug.Log(snapshot.GetRawJsonValue());
-                Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue())
+                Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue());
+
+                GM.Coins = save.coins;
+                SM.ActivateSkin = (ShopItem.ItemType)save.active_skin_index;
+
+                foreach (var item in save.bought_items)
+                {
+                    SM.Items[i].IsBought = item;
+                }
+                
+                GM.RefreshText();
+                GM.ActivateSkin((int)SM.ActivateSkin);
             }
         });
 
@@ -77,17 +87,13 @@ public class SaveManager : MonoBehaviour
 
         // Save save = (Save)bf.Deserialize(fs);
 
-        GM.Coins = save.coins;
-        SM.ActivateSkin = (ShopItem.ItemType)save.active_skin_index;
 
-        for (int i = 0; i < save.bought_items.Count; i++)
-            SM.Items[i].IsBought = save.bought_items[i];
+        // for (int i = 0; i < save.bought_items.Count; i++)
+            // SM.Items[i].IsBought = save.bought_items[i];
 
         // fs.Close();
         // fs.Close();
 
-        GM.RefreshText();
-        GM.ActivateSkin((int)SM.ActivateSkin);
     }
 }
 
