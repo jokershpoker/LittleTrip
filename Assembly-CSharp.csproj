@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\ShopManager.cs" />
     <Compile Include="Assets\Scripts\Skin.cs" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-analytics-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-database-unity\maven-metadata.xml" />
     <Reference Include="UnityEngine">
@@ -255,6 +256,9 @@
     <Reference Include="Firebase.App">
       <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Platform">
       <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
     </Reference>
@@ -264,14 +268,14 @@
     <Reference Include="Google.MiniJson">
       <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Auth">
-      <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Compat">
       <HintPath>D:/Little Trip/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.TaskExtension">
       <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Database">
       <HintPath>D:/Little Trip/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>

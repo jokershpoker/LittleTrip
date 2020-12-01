@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189501305020",
+    "firebase_url": "https://little-trip.firebaseio.com",
+    "project_id": "little-trip",
+    "storage_bucket": "little-trip.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189501305020:android:d3630571eb56f53c01e0b9",
+        "android_client_info": {
+          "package_name": "com.Jokershpoker.LittleTrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189501305020-bcigk40gjn1721rnhisf7b40df2jc4cb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlnOcTpxI4v5cn-ztsAHJNxwZD8LbkXTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189501305020-bcigk40gjn1721rnhisf7b40df2jc4cb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
