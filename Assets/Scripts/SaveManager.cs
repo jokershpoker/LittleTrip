@@ -29,7 +29,7 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
-        Instance.db_ref = FirebaseDatabase.DefaultInstance..GetReference("users");
+        Instance.db_ref = FirebaseDatabase.DefaultInstance.GetReference("users");
 
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
