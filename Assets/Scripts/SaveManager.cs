@@ -4,6 +4,10 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
+
 public class SaveManager : MonoBehaviour
 {
     public ShopManager SM;
@@ -12,6 +16,8 @@ public class SaveManager : MonoBehaviour
     string filePath;
 
     public static SaveManager Instance;
+
+    private DatabaseReference db_ref;
 
     private void Awake()
     {
@@ -22,6 +28,8 @@ public class SaveManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        Instance.db_ref = FirebaseDatabase.DefaultInstance.RootReference;
 
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
@@ -46,6 +54,20 @@ public class SaveManager : MonoBehaviour
 
     public void LoadGame()
     {
+
+        Instance.db_ref
+        .GetReference("users")
+        .GetValueAsync().ContinueWith(task => {
+            if (task.IsFaulted) {
+            // Handle the error...
+            }
+            else if (task.IsCompleted) {
+            DataSnapshot snapshot = task.Result;
+            // Do something with snapshot...
+            Debug.Log(snapshot);
+            }
+        });
+
         if (!File.Exists(filePath))
             return;
 
