@@ -35,7 +35,7 @@ public class SaveManager : MonoBehaviour
         filePath = Application.persistentDataPath + "data.gamesave";
 
         LoadGame();
-        SaveGame();
+        //SaveGame();
     }
 
     public void SaveGame()
@@ -48,12 +48,12 @@ public class SaveManager : MonoBehaviour
         save.active_skin_index = (int)SM.ActivateSkin;
         save.SaveBoughtItems(SM.Items);
 
-        save.runs.add(GM.Points);
+        save.runs.Add(GM.Points);
 
         Debug.Log(JsonUtility.ToJson(save));
 
         Instance.db_ref
-        .SetRawJsonValueAsync(JsonUtility.ToJson(save))
+        .SetRawJsonValueAsync(JsonUtility.ToJson(save));
 
         bf.Serialize(fs, save);
         fs.Close();
@@ -89,7 +89,7 @@ public class Save
 {
     public int coins;
     public int active_skin_index;
-    public List<int> runs;
+    public List<float> runs;
     public List<bool> bought_items = new List<bool>();
     public void SaveBoughtItems(List<ShopItem> items)
     {

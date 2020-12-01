@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
 
     public Text PointsTxt,
                 CoinsTxt;
-    float Points;
+    public float Points;
 
-    public int Coins = 0;
+    public int Coins = -1;
 
     public bool CanPlay = true;
 
