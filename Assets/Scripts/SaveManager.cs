@@ -48,6 +48,8 @@ public class SaveManager : MonoBehaviour
         save.active_skin_index = (int)SM.ActivateSkin;
         save.SaveBoughtItems(SM.Items);
 
+        Debug.Log( JsonUtility.ToJson(save));
+
         bf.Serialize(fs, save);
         fs.Close();
     }
@@ -62,7 +64,6 @@ public class SaveManager : MonoBehaviour
             }
             else if (task.IsCompleted) {
                 DataSnapshot snapshot = task.Result;
-                Debug.Log(snapshot.GetRawJsonValue());
                 Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue());
 
                 GM.Coins = save.coins;
@@ -75,22 +76,6 @@ public class SaveManager : MonoBehaviour
                 GM.ActivateSkin((int)SM.ActivateSkin);
             }
         });
-
-        // if (!File.Exists(filePath))
-        //     return;
-
-        // BinaryFormatter bf = new BinaryFormatter();
-        // FileStream fs = new FileStream(filePath, FileMode.Open);
-
-        // Save save = (Save)bf.Deserialize(fs);
-
-
-        // for (int i = 0; i < save.bought_items.Count; i++)
-        //     SM.Items[i].IsBought = save.bought_items[i];
-
-        // fs.Close();
-        // fs.Close();
-
     }
 }
 
