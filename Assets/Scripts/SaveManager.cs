@@ -48,7 +48,12 @@ public class SaveManager : MonoBehaviour
         save.active_skin_index = (int)SM.ActivateSkin;
         save.SaveBoughtItems(SM.Items);
 
-        Debug.Log( JsonUtility.ToJson(save));
+        save.runs.add(GM.Points);
+
+        Debug.Log(JsonUtility.ToJson(save));
+
+        Instance.db_ref
+        .SetRawJsonValueAsync(JsonUtility.ToJson(save))
 
         bf.Serialize(fs, save);
         fs.Close();
