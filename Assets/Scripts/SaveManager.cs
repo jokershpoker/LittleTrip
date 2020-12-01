@@ -29,7 +29,7 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
-        Instance.db_ref = FirebaseDatabase.DefaultInstance.RootReference;
+        Instance.db_ref = FirebaseDatabase.DefaultInstance..GetReference("users");
 
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
@@ -56,7 +56,6 @@ public class SaveManager : MonoBehaviour
     {
 
         Instance.db_ref
-        .GetReference("users")
         .GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted) {
             // Handle the error...
