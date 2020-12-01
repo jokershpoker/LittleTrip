@@ -1,0 +1,6 @@
+.vs
+Logs
+Library/*
+obj/Debug
+Temp
+Assets/Firebase
