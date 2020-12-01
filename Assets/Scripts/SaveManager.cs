@@ -69,11 +69,9 @@ public class SaveManager : MonoBehaviour
                 GM.Coins = save.coins;
                 SM.ActivateSkin = (ShopItem.ItemType)save.active_skin_index;
 
-                foreach (var item in save.bought_items)
-                {
-                    SM.Items[i].IsBought = item;
-                }
-                
+                for (int i = 0; i < save.bought_items.Count; i++)
+                    SM.Items[i].IsBought = save.bought_items[i];
+
                 GM.RefreshText();
                 GM.ActivateSkin((int)SM.ActivateSkin);
             }
@@ -89,7 +87,7 @@ public class SaveManager : MonoBehaviour
 
 
         // for (int i = 0; i < save.bought_items.Count; i++)
-            // SM.Items[i].IsBought = save.bought_items[i];
+        //     SM.Items[i].IsBought = save.bought_items[i];
 
         // fs.Close();
         // fs.Close();
