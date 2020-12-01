@@ -52,17 +52,16 @@ public class SaveManager : MonoBehaviour
         fs.Close();
     }
 
-    public void LoadGame()
+    public async void LoadGame()
     {
 
-        Instance.db_ref
+        await Instance.db_ref
         .GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted) {
             // Handle the error...
             }
             else if (task.IsCompleted) {
                 DataSnapshot snapshot = task.Result;
-                // Do something with snapshot...
                 Debug.Log(snapshot.GetRawJsonValue());
                 Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue());
 
