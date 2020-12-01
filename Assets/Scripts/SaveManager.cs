@@ -34,7 +34,7 @@ public class SaveManager : MonoBehaviour
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
 
-        LoadGame();
+        StartCoroutine(LoadGame());
         SaveGame();
     }
 
