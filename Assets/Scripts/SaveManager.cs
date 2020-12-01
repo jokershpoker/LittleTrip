@@ -61,9 +61,10 @@ public class SaveManager : MonoBehaviour
             // Handle the error...
             }
             else if (task.IsCompleted) {
-            DataSnapshot snapshot = task.Result;
-            // Do something with snapshot...
-            Debug.Log(snapshot.GetRawJsonValue());
+                DataSnapshot snapshot = task.Result;
+                // Do something with snapshot...
+                Debug.Log(snapshot.GetRawJsonValue());
+            }
         });
 
         if (!File.Exists(filePath))
