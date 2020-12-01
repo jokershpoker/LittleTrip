@@ -89,7 +89,7 @@ public class Save
 {
     public int coins;
     public int active_skin_index;
-    public List<float> runs;
+    public List<float> runs = new List<float>();
     public List<bool> bought_items = new List<bool>();
     public void SaveBoughtItems(List<ShopItem> items)
     {
