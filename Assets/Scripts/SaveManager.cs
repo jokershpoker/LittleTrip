@@ -34,7 +34,7 @@ public class SaveManager : MonoBehaviour
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
 
-        StartCoroutine(LoadGame());
+        LoadGame();
         SaveGame();
     }
 
@@ -52,10 +52,10 @@ public class SaveManager : MonoBehaviour
         fs.Close();
     }
 
-    public async void LoadGame()
+    public void LoadGame()
     {
 
-        await Instance.db_ref
+        Instance.db_ref
         .GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted) {
             // Handle the error...
