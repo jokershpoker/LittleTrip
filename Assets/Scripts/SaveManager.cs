@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.JSONSerializeModule;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
@@ -29,7 +30,7 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
-        Instance.db_ref = FirebaseDatabase.DefaultInstance.GetReference("users");
+        Instance.db_ref = FirebaseDatabase.DefaultInstance.GetReference("users/testo");
 
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
@@ -44,8 +45,8 @@ public class SaveManager : MonoBehaviour
         FileStream fs = new FileStream(filePath, FileMode.Create);
 
         Save save = new Save();
-        save.Coins = GM.Coins;
-        save.ActiveSkinIndex = (int)SM.ActivateSkin;
+        save.coins = GM.Coins;
+        save.active_skin_index = (int)SM.ActivateSkin;
         save.SaveBoughtItems(SM.Items);
 
         bf.Serialize(fs, save);
@@ -64,25 +65,26 @@ public class SaveManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 // Do something with snapshot...
                 Debug.Log(snapshot.GetRawJsonValue());
+                Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue())
             }
         });
 
-        if (!File.Exists(filePath))
-            return;
+        // if (!File.Exists(filePath))
+        //     return;
 
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream fs = new FileStream(filePath, FileMode.Open);
+        // BinaryFormatter bf = new BinaryFormatter();
+        // FileStream fs = new FileStream(filePath, FileMode.Open);
 
-        Save save = (Save)bf.Deserialize(fs);
+        // Save save = (Save)bf.Deserialize(fs);
 
-        GM.Coins = save.Coins;
-        SM.ActivateSkin = (ShopItem.ItemType)save.ActiveSkinIndex;
+        GM.Coins = save.coins;
+        SM.ActivateSkin = (ShopItem.ItemType)save.active_skin_index;
 
-        for (int i = 0; i < save.BoughtItems.Count; i++)
-            SM.Items[i].IsBought = save.BoughtItems[i];
+        for (int i = 0; i < save.bought_items.Count; i++)
+            SM.Items[i].IsBought = save.bought_items[i];
 
-        fs.Close();
-        fs.Close();
+        // fs.Close();
+        // fs.Close();
 
         GM.RefreshText();
         GM.ActivateSkin((int)SM.ActivateSkin);
@@ -92,13 +94,14 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class Save
 {
-    public int Coins;
-    public int ActiveSkinIndex;
-    public List<bool> BoughtItems = new List<bool>();
+    public int coins;
+    public int active_skin_index;
+    public List<int> runs;
+    public List<bool> bought_items = new List<bool>();
     public void SaveBoughtItems(List<ShopItem> items)
     {
         foreach (var item in items)
-            BoughtItems.Add(item.IsBought);
+            bought_items.Add(item.IsBought);
     }
 
 
