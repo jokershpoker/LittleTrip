@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public RestartLevel_1 Res;
-
+    public PauseMenuController PMC;
     public GameObject ResultObj;
+    public GameObject FinishObj;
     public PlayerMovement PM;
 
     public Text PointsTxt,
@@ -25,27 +25,35 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-
         ResultObj.SetActive(false);
-        PM.StartGame();
-        StartCoroutine(Play());
+        FinishObj.SetActive(false);
+        CanPlay = true;
+
         PM.SkinAnimator.SetTrigger("respawn");
-        RestartLevel1();
+        StartCoroutine(FixTrigger());
+
+        
 
         Points = 0;
     }
 
-
-    IEnumerator Play()
+    IEnumerator FixTrigger()
     {
-        yield return new WaitForSeconds(0.1f);
-        CanPlay = true;
+        yield return null;
+        PM.SkinAnimator.ResetTrigger("respawn");
     }
+
+
 
     private void Update()
     {
         if (CanPlay)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                PMC.Pause();
+
             Points += Time.deltaTime * 3;
+        }
 
         PointsTxt.text = ((int)Points).ToString();
     }
@@ -54,8 +62,13 @@ public class GameManager : MonoBehaviour
     {
         ResultObj.SetActive(true);
         SaveManager.Instance.SaveGame();
-        SaveManager.Instance.SaveGame();
     }
+
+    public void ShowFinish()
+    {
+        FinishObj.SetActive(true);
+        SaveManager.Instance.SaveGame();
+    }    
 
     public void AddCoins (int number)
     {

@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    Animation anim;
 
     public Animator SkinAnimator;
     public GameManager GM;
     CapsuleCollider selfCollider;
     Rigidbody rb;
+
+    public GameObject Vfx;
 
     public Transform PlayerTransf;
 
@@ -24,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 ccCenterNorm = new Vector3(0, 1f, 0),
             ccCenterRoll = new Vector3(0, .2f, 0),
             StartPlayerPos;
+    Vector3 rbVelocity;
 
     float ccHeightNorm = 2,
           ccHeightRoll = .4f;
@@ -35,11 +39,32 @@ public class PlayerMovement : MonoBehaviour
         selfCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
 
-        StartGame();
+        SwipeController.SwipeEvent += CheckInput;
+       
+    }
+
+    public void Pause()
+    {
+        rbVelocity = rb.velocity;
+        rb.isKinematic = true;
+        SkinAnimator.speed = 0;
+    }
+
+    public void UnPause()
+    {
+        rb.isKinematic = false;
+        rb.velocity = rbVelocity;
+        SkinAnimator.speed = 1;
+    }    
+
+    private void OnDestroy()
+    {
+        SwipeController.SwipeEvent -= CheckInput;
     }
 
     private void FixedUpdate()
     {
+        Debug.DrawRay(transform.position, Vector3.down * 0.05f);
         rb.AddForce(new Vector3(0, Physics.gravity.y * 4, 0), ForceMode.Acceleration);
 
         if (wannaJump && isGrounded())
@@ -55,39 +80,33 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (isGrounded())
-        {
             SkinAnimator.ResetTrigger("falling");
+        else if (rb.velocity.y<-8)
+            SkinAnimator.SetTrigger("falling");
 
-            if (GM.CanPlay)
-            {
-                if (!isRolling)
-                {
-                    if (Input.GetAxisRaw("Vertical") > 0)
-                        wannaJump = true;
-                    else if (Input.GetAxisRaw("Vertical") < 0)
-                        StartCoroutine(DoRoll());
-
-                }
-            }
-        }
-        
-            SkinAnimator.SetBool("falling", rb.velocity.y < -8);   
+        SkinAnimator.SetBool("falling", rb.velocity.y < -8);   
 
         Vector3 Pos = transform.position;
         Pos.z = 0;
         transform.position = Pos;
     }
 
+    void CheckInput(SwipeController.SwipeType type)
+    {
+        if (isGrounded() && GM.CanPlay && !isRolling)
+        {           
+            if (type == SwipeController.SwipeType.UP)
+                        wannaJump = true;
+            else if (type == SwipeController.SwipeType.DOWN)
+                        StartCoroutine(DoRoll());                
+        }
+
+    }
+
     bool isGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.05f);
+        return Physics.Raycast(PlayerTransf.position, Vector3.down, 0.05f);
     }
-
-    public void StartGame()
-    {
-        
-    }
-
 
     IEnumerator DoRoll()
     {
@@ -97,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         selfCollider.center = ccCenterRoll;
         selfCollider.height = ccHeightRoll;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1);
                 
         SkinAnimator.SetBool("rolling", false);
 
@@ -122,29 +141,44 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("falling");
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (!hit.gameObject.CompareTag("Trap") || !GM.CanPlay)
-            return;
 
 
-
-        StartCoroutine(GameOver());
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((!collision.gameObject.CompareTag("Trap")&&
-            !collision.gameObject.CompareTag("DeathPlane")) || 
+        if (collision.gameObject.tag == "Finish")
+        {
+            StartCoroutine(Finish());
+            return;
+        }
+
+        if ((!collision.gameObject.CompareTag("Trap") &&
+             !collision.gameObject.CompareTag("DeathPlane")) ||
             !GM.CanPlay)
             return;
+
+
         if (GM.CanPlay == false)
         {
             return;
         }
 
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            var vfx = Instantiate(Vfx, collision.gameObject.transform.position, Quaternion.identity);
+            Destroy(vfx, 1);
+            Destroy(collision.gameObject);
+        }
         StartCoroutine(GameOver());
     }
+
+    IEnumerator Finish()
+    {
+        GM.CanPlay = false;
+        yield return new WaitForSeconds(.1f);
+        GM.ShowFinish();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -167,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
         SkinAnimator.ResetTrigger("death");
 
         GM.ShowResult();
+       
         
     }
 

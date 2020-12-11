@@ -35,7 +35,7 @@ public class SaveManager : MonoBehaviour
         filePath = Application.persistentDataPath + "data.gamesave";
 
         LoadGame();
-        //SaveGame();
+        SaveGame();
     }
 
     public void SaveGame()
@@ -65,7 +65,7 @@ public class SaveManager : MonoBehaviour
         Instance.db_ref
         .GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted) {
-            // Handle the error...
+                //Handle the error...
             }
             else if (task.IsCompleted) {
                 DataSnapshot snapshot = task.Result;
