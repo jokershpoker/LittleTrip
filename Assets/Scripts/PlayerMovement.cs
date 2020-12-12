@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         SwipeController.SwipeEvent += CheckInput;
+
+        if (Advertisement.isSupported)
+        {
+            Advertisement.Initialize("3935565", false);
+        }
        
     }
 
@@ -169,6 +175,8 @@ public class PlayerMovement : MonoBehaviour
             Destroy(vfx, 1);
             Destroy(collision.gameObject);
         }
+
+
         StartCoroutine(GameOver());
     }
 
@@ -199,6 +207,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SkinAnimator.ResetTrigger("death");
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show("video");
+        }
+
 
         GM.ShowResult();
        

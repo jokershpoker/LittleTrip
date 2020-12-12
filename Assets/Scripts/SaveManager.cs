@@ -6,7 +6,7 @@ using System.IO;
 
 using Firebase;
 using Firebase.Database;
-using Firebase.Unity.Editor;
+//using Firebase.Unity.Editor;
 
 public class SaveManager : MonoBehaviour
 {

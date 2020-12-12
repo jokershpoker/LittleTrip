@@ -1,5 +1,57 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": {
+      "version": "1.2.162",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.app": {
+      "version": "7.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.161"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.auth": {
+      "version": "7.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.app": "7.0.1"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.database": {
+      "version": "7.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.auth": "7.0.1"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.instance-id": {
+      "version": "7.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.app": "7.0.1"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.unity.ads": {
+      "version": "3.4.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
       "depth": 0,
