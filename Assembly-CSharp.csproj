@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{C84F64E1-DFC0-4B03-2DDF-35C895277E13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -63,11 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AdsManager.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\CheckPointManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\PauseMenuController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\RebornDeathPlane.cs" />
     <Compile Include="Assets\Scripts\RoadBlockScr.cs" />
     <Compile Include="Assets\Scripts\SaveManager.cs" />
     <Compile Include="Assets\Scripts\ShopItem.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Assets\Scripts\Skin.cs" />
     <Compile Include="Assets\Scripts\SwipeController.cs" />
     <None Include="Assets\LICENSE.txt" />
+    <None Include="ClassDiagram1.cd" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -636,8 +641,14 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Little Trip/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Monetization">
+      <HintPath>D:/Little Trip/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/Little Trip/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>D:/Little Trip/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Little Trip/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -666,14 +677,9 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/Little Trip/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Monetization">
-      <HintPath>D:/Little Trip/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/Little Trip/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.Advertisements;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator SkinAnimator;
     public GameManager GM;
+    public AdsManager AM;
+    public UnityEvent AdsCallBack;
+    public int DeadCounter;
+
+    public Transform RebornPoint;
+
     CapsuleCollider selfCollider;
     Rigidbody rb;
 
@@ -37,15 +44,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        DeadCounter = 0;
         selfCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
 
         SwipeController.SwipeEvent += CheckInput;
 
-        if (Advertisement.isSupported)
-        {
-            Advertisement.Initialize("3935565", false);
-        }
        
     }
 
@@ -176,8 +180,23 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("DeathPlane"))
+        {
+            RebornPoint = collision.gameObject.GetComponent<RebornDeathPlane>().RebornPoint; 
+        }
+
 
         StartCoroutine(GameOver());
+    }
+
+    public void RebornFirstLaunch()
+    {
+        if (DeadCounter<2)
+        {
+            gameObject.SetActive(true);
+            AdsCallBack.AddListener(() => Reborn());
+        }
+        else AdsCallBack.RemoveAllListeners();
     }
 
     IEnumerator Finish()
@@ -200,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        DeadCounter++;
         GM.CanPlay = false;
 
         SkinAnimator.SetTrigger("death");
@@ -207,15 +227,26 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SkinAnimator.ResetTrigger("death");
-        if (Advertisement.IsReady())
-        {
-            Advertisement.Show("video");
-        }
-
 
         GM.ShowResult();
-       
+        AdsCallBack.RemoveAllListeners();
+        AM.WatchAds();
         
+    }
+
+    public void Reborn()
+    {
+        
+        SkinAnimator.ResetTrigger("death");
+        SkinAnimator.SetTrigger("respawn");
+
+        if(RebornPoint!=null)
+        {
+            transform.position = RebornPoint.position;
+        }
+
+        GM.CanPlay = true;
+        AdsCallBack.RemoveListener(() => Reborn());
     }
 
 }
