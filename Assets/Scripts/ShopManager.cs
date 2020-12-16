@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public List<ShopItem> Items;
-    public ShopItem.ItemType ActivateSkin;
+    public ShopItem.ItemType ActiveSkin;
 
     public void OpenShop()
     {

@@ -20,7 +20,7 @@ public class ShopItem : MonoBehaviour
     {
         get
         {
-            return Type == SM.ActivateSkin;
+            return Type == SM.ActiveSkin;
         }
     }
 
@@ -64,7 +64,7 @@ public class ShopItem : MonoBehaviour
 
     public void ActivateItem()
     {
-        SM.ActivateSkin = Type;
+        SM.ActiveSkin = Type;
         SM.CheckItemButtons();
 
         switch(Type)

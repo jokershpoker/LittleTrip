@@ -4,20 +4,15 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-using Firebase;
-using Firebase.Database;
-//using Firebase.Unity.Editor;
-
 public class SaveManager : MonoBehaviour
 {
+
     public ShopManager SM;
     public GameManager GM;
 
     string filePath;
 
     public static SaveManager Instance;
-
-    private DatabaseReference db_ref;
 
     private void Awake()
     {
@@ -28,8 +23,6 @@ public class SaveManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        Instance.db_ref = FirebaseDatabase.DefaultInstance.GetReference("users/testo"); // "testo" Needs to be changed to play Games User ref
 
         GM = FindObjectOfType<GameManager>();
         filePath = Application.persistentDataPath + "data.gamesave";
@@ -44,16 +37,9 @@ public class SaveManager : MonoBehaviour
         FileStream fs = new FileStream(filePath, FileMode.Create);
 
         Save save = new Save();
-        save.coins = GM.Coins;
-        save.active_skin_index = (int)SM.ActivateSkin;
+        save.Coins = GM.Coins;
+        save.ActiveSkinIndex = (int)SM.ActiveSkin;
         save.SaveBoughtItems(SM.Items);
-
-        save.runs.Add(GM.Points);
-
-        Debug.Log(JsonUtility.ToJson(save));
-
-        Instance.db_ref
-        .SetRawJsonValueAsync(JsonUtility.ToJson(save));
 
         bf.Serialize(fs, save);
         fs.Close();
@@ -61,41 +47,38 @@ public class SaveManager : MonoBehaviour
 
     public void LoadGame()
     {
+        if (!File.Exists(filePath))
+            return;
 
-        Instance.db_ref
-        .GetValueAsync().ContinueWith(task => {
-            if (task.IsFaulted) {
-                //Handle the error...
-            }
-            else if (task.IsCompleted) {
-                DataSnapshot snapshot = task.Result;
-                Save save = JsonUtility.FromJson<Save>(snapshot.GetRawJsonValue());
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream fs = new FileStream(filePath, FileMode.Open);
 
-                GM.Coins = save.coins;
-                SM.ActivateSkin = (ShopItem.ItemType)save.active_skin_index;
+        Save save = (Save)bf.Deserialize(fs);
 
-                for (int i = 0; i < save.bought_items.Count; i++)
-                    SM.Items[i].IsBought = save.bought_items[i];
+        GM.Coins = save.Coins;
+        SM.ActiveSkin = (ShopItem.ItemType)save.ActiveSkinIndex;
 
-                GM.RefreshText();
-                GM.ActivateSkin((int)SM.ActivateSkin);
-            }
-        });
+        for (int i = 0; i < save.BoughtItems.Count; i++)
+            SM.Items[i].IsBought = save.BoughtItems[i];
+
+        fs.Close();
+
+        GM.RefreshText();
+        GM.ActivateSkin((int)SM.ActiveSkin);
     }
+
 }
 
 [System.Serializable]
 public class Save
 {
-    public int coins;
-    public int active_skin_index;
-    public List<float> runs = new List<float>();
-    public List<bool> bought_items = new List<bool>();
+    public int Coins;
+    public int ActiveSkinIndex;
+    public List<bool> BoughtItems = new List<bool>();
+
     public void SaveBoughtItems(List<ShopItem> items)
     {
         foreach (var item in items)
-            bought_items.Add(item.IsBought);
+            BoughtItems.Add(item.IsBought);
     }
-
-
 }

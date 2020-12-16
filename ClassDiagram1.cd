@@ -1,4 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AdsManager" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACEAAAAAAAIAIIAAAAAAABAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\AdsManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="PM" />
+    </ShowAsAssociation>
+    <Lollipop Position="1.234" />
+  </Class>
+  <Class Name="CameraMovement">
+    <Position X="7.25" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAJCIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CameraMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckPointManager">
+    <Position X="0.5" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CheckPointManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="PM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="13.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgBAAAAAIKUAkgAAAIgAAAoAAQQBAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="PMC" />
+      <Field Name="PM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MainMenuController">
+    <Position X="17.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAkAAAAAACAAAAAAAAQgAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="GM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PauseMenuController">
+    <Position X="12.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAACAQBIAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\PauseMenuController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="GM" />
+      <Field Name="MMC" />
+      <Field Name="PM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerMovement">
+    <Position X="9.75" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEQhwQADAiAAAoAEABQAACAAAQBA8gAIQQACAAAkhAg=</HashCode>
+      <FileName>Assets\Scripts\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="GM" />
+      <Field Name="AM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RebornDeathPlane">
+    <Position X="18.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\RebornDeathPlane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RoadBlockScr">
+    <Position X="7" Y="9.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\RoadBlockScr.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="GM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SaveManager">
+    <Position X="21" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAAAAAAQAQAAAAAAAAEAAQAAAAAAAAEE=</HashCode>
+      <FileName>Assets\Scripts\SaveManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="SM" />
+      <Field Name="GM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Save">
+    <Position X="4.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAUAAAQAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SaveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShopItem">
+    <Position X="16.75" Y="8.5" Width="2" />
+    <NestedTypes>
+      <Enum Name="ShopItem.ItemType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\ShopItem.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAIEAEAAEAAAQBAQAAAAAAAAgQACAAgAIAA=</HashCode>
+      <FileName>Assets\Scripts\ShopItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gm" />
+      <Field Name="SM" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ShopManager">
+    <Position X="20.75" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAQAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skin">
+    <Position X="4.75" Y="9.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABBAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Skin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SwipeController">
+    <Position X="21" Y="1.75" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="SwipeController.SwipeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SwipeController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="SwipeController.OnSwipeInput" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SwipeController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIYAAAAAAEAIAAAAAACAAAAAAABAAEAAAAAQAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\SwipeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
